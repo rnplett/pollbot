@@ -11,13 +11,13 @@
  * 
  */
 
-var Botkit = require('botkit');
-
+const Botkit = require('botkit');
+const creds = require('inputs/creds')
 
 // Fetch token from environement
 // [COMPAT] supports SPARK_TOKEN for backward compatibility
-var accessToken = process.env.ACCESS_TOKEN
-if (!accessToken) {
+const accessToken = creds.ACCESS_TOKEN
+if (!creds.ACCESS_TOKEN) {
     console.log("Could not start as this bot requires a Webex Teams API access token.");
     console.log("Please invoke with an ACCESS_TOKEN environment variable");
     console.log("Example: ");
@@ -25,7 +25,7 @@ if (!accessToken) {
     process.exit(1);
 }
 
-if (!process.env.PUBLIC_URL) {
+if (!creds.PUBLIC_URL) {
     console.log("Could not start as this bot must expose a public endpoint.");
     console.log("Please add env variable PUBLIC_URL on the command line");
     console.log("Example: ");
@@ -33,15 +33,15 @@ if (!process.env.PUBLIC_URL) {
     process.exit(1);
 }
 
-var controller = Botkit.sparkbot({
+const controller = Botkit.sparkbot({
     log: true,
-    public_address: process.env.PUBLIC_URL,
-    access_token: accessToken,
+    public_address: creds.PUBLIC_URL,
+    access_token: creds.ACCESS_TOKEN,
     secret: process.env.SECRET, // this is a RECOMMENDED security setting that checks if incoming payloads originate from Webex
     webhook_name: process.env.WEBHOOK_NAME || 'built with BotKit (development)'
 });
 
-var bot = controller.spawn({
+const bot = controller.spawn({
 });
 
 controller.setupWebserver(process.env.PORT || 3000, function(err, webserver) {

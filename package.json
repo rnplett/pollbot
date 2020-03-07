@@ -1,10 +1,10 @@
 {
   "name": "botkit-webex-samples",
   "version": "0.4.0",
-  "description": "Webex Teams bots built with Botkit",
-  "main": "helloworld.js",
+  "description": "Webex Teams bot to take a poll of team members",
+  "main": "poll.js",
   "scripts": {
-    "start": "node helloworld.js"
+    "start": "nodemon poll.js"
   },
   "keywords": [
     "webex",
