@@ -16,10 +16,11 @@
   "license": "MIT",
   "dependencies": {
     "botkit": "^0.7.0",
-    "node-env-file": "^0.1.8",
     "ciscospark-websocket-events": "^1.2.0",
     "debug": "^4.1.0",
     "node-emoji": "^1.8.1",
+    "node-env-file": "^0.1.8",
+    "nodemon": "^2.0.2",
     "request": "^2.88.0"
   }
 }

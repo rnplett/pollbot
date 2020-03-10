@@ -12,22 +12,25 @@
  */
 
 const Botkit = require('botkit');
-const creds = require('inputs/creds')
+
+const creds = require('./inputs/creds');
+ACCESS_TOKEN = creds.ACCESS_TOKEN;
+PUBLIC_URL = creds.PUBLIC_URL;
 
 // Fetch token from environement
 // [COMPAT] supports SPARK_TOKEN for backward compatibility
-const accessToken = creds.ACCESS_TOKEN
-if (!creds.ACCESS_TOKEN) {
+//const accessToken = creds.ACCESS_TOKEN
+if (!ACCESS_TOKEN) {
     console.log("Could not start as this bot requires a Webex Teams API access token.");
-    console.log("Please invoke with an ACCESS_TOKEN environment variable");
+    console.log("Please invoke with an ACCESS_TOKEN environment variable or update it in the creds.js file");
     console.log("Example: ");
     console.log("> ACCESS_TOKEN=XXXXXXXXXXXX PUBLIC_URL=YYYYYYYYYYYYY node helloworld.js");
     process.exit(1);
 }
 
-if (!creds.PUBLIC_URL) {
+if (!PUBLIC_URL) {
     console.log("Could not start as this bot must expose a public endpoint.");
-    console.log("Please add env variable PUBLIC_URL on the command line");
+    console.log("Please add env variable PUBLIC_URL on the command line or update it in the creds.js file");
     console.log("Example: ");
     console.log("> ACCESS_TOKEN=XXXXXXXXXXXX PUBLIC_URL=YYYYYYYYYYYYY node helloworld.js");
     process.exit(1);
@@ -35,8 +38,8 @@ if (!creds.PUBLIC_URL) {
 
 const controller = Botkit.sparkbot({
     log: true,
-    public_address: creds.PUBLIC_URL,
-    access_token: creds.ACCESS_TOKEN,
+    public_address: PUBLIC_URL,
+    access_token: ACCESS_TOKEN,
     secret: process.env.SECRET, // this is a RECOMMENDED security setting that checks if incoming payloads originate from Webex
     webhook_name: process.env.WEBHOOK_NAME || 'built with BotKit (development)'
 });
@@ -65,7 +68,7 @@ controller.hears(['^help'], 'direct_message,direct_mention', function(bot, messa
 //
 controller.hears(['^hello'], 'direct_message,direct_mention', function(bot, message) {
     var email = message.user; // Webex Teams User that created the message orginally 
-    bot.reply(message, "Hello <@personEmail:" + email + ">");
+    bot.reply(message, "Hello There");
 });
 
 
