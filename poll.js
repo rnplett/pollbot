@@ -59,7 +59,7 @@ controller.setupWebserver(process.env.PORT || 3000, function(err, webserver) {
 // Help command
 //
 controller.hears(['^help'], 'direct_message,direct_mention', function(bot, message) {
-    bot.reply(message, "Hi, I am the Hello World bot !\n\nType `hello` to see me in action.");
+    bot.reply(message, "Hi, I am the RNP Pollbot!\n\nType `hello` to see me in action.");
 });
 
 
@@ -67,8 +67,9 @@ controller.hears(['^help'], 'direct_message,direct_mention', function(bot, messa
 // Bots commands here
 //
 controller.hears(['^hello'], 'direct_message,direct_mention', function(bot, message) {
-    var email = message.user; // Webex Teams User that created the message orginally 
-    bot.reply(message, "Hello There");
+    var email = message.data.personEmail; // Webex Teams User that created the message orginally 
+    // console.log(message)
+    bot.reply(message, "Hello there " + email);
 });
 
 
